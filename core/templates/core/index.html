@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+<h2>Recent Upload History</h2>
+
+{% if historial_cargas %}
+<table border="1">
+    <thead>
+        <tr>
+            <th>CLIENT NUMBER</th>
+            <th>NAME/LNAME</th>
+            <th>CITY</th>
+            <th>DAY OF ADMISSION</th>
+            <th>CLIENT ID</th>
+            <th>DAY OF BIRTH</th>
+            <th>ADDRESS</th>
+            <th>PHONE</th>
+            <th>COUNTRY ORIGIN</th>
+            <th>GEO</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for carga in historial_cargas %}
+        <tr>
+            <td>{{ carga.CLIENT_NUMBER }}</td>
+            <td>{{ carga.CLIENT_FNAME }} {{ carga.CLIENT_LNAME }}</td>
+            <td>{{ carga.CLIENT_CITY }}</td>
+            <td>{{ carga.CLIENT_DMYADM }}</td>
+            <td>{{ carga.CLIENT_ID }}</td>
+            <td>{{ carga.CLIENT_DMYBIR }}</td>
+            <td>{{ carga.CLIENT_ADDRESS }}</td>
+            <td>{{ carga.CLIENT_PHONE }}</td>
+            <td>{{ carga.CLIENT_IDORIGIN }}</td>
+
+            <td>
+                {% with geopos=carga.CLIGEO_NUMBER.all|first %}
+                    {% if geopos %}
+                        <a target="_blank" 
+                           href="https://www.google.com/maps/search/?api=1&query={{ geopos.CLIGEO_LATITUDE }},{{ geopos.CLIGEO_LENGHT }}"
+                           class="btn btn-default btn-xs">
+                           <i class="glyphicon glyphicon-map-marker"></i> Google Maps
+                        </a>
+                    {% else %}
+                        <em>No location</em>
+                    {% endif %}
+                {% endwith %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+        <a target="_blank" href="{% url 'core:cli_create'  %}" class="btn btn-info btn-xs btn-xxs" role="button"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Create</a>                
+{% else %}
+<p>No clients registered yet.</p>
+        <a target="_blank" href="{% url 'core:cli_create'  %}" class="btn btn-info btn-xs btn-xxs" role="button"><i class="glyphicon glyphicon-th-list" aria-hidden="true"></i>Create</a>                
+
+{% endif %}
+{% endblock %}
+

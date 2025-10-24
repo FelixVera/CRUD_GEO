@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="max-width: 900px; margin-top: 30px;">
+  <h4>Customer Geoposition Recorder</h4>
+  <hr>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">{{ form.identification.label_tag }}{{ form.identification }}</div>
+      <div class="col-md-6">{{ form.type.label_tag }}{{ form.type }}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-6">{{ form.latitude.label_tag }}{{ form.latitude }}</div>
+      <div class="col-md-6">{{ form.length.label_tag }}{{ form.length }}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12">{{ form.observation.label_tag }}{{ form.observation }}</div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Save Geoposition</button>
+  </form>
+
+  <hr>
+
+  <div id="map" style="height: 450px; border-radius: 8px; margin-top: 15px;"></div>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  const apiKey = "{{ api_key }}";
+
+  const map = L.map('map').setView([38.90232290900323, -77.02825127130416], 13);
+
+  L.tileLayer(`https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey=${apiKey}`, {
+    maxZoom: 20,
+    attribution: '© <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  let marker;
+
+  function onMapClick(e) {
+    const lat = e.latlng.lat.toFixed(6);
+    const lon = e.latlng.lng.toFixed(6);
+
+    document.getElementById("id_latitude").value = lat;
+    document.getElementById("id_length").value = lon;
+
+    if (marker) {
+      marker.setLatLng(e.latlng);
+    } else {
+      marker = L.marker(e.latlng).addTo(map);
+    }
+  }
+
+  map.on('click', onMapClick);
+</script>
+{% endblock %}
