@@ -1,32 +1,31 @@
-# GEOPOSICION Y CREACION DE CLIENTES.
+# GEOPOSITION AND CUSTOMER CREATION.
 
 
-Una aplicacion web de Django en donde usamos APIS de mapas para el almacenamiento de datos geográficos.
-
-
-
-
-## ✨ Características Principales
-
-Este proyecto demuestra el uso de Django funciones de negocio: 1. CRUD de Clientes. 2. Almacenamiento de Coordenadas (Lat/Lon). 3. Visualizacion de Mapa Interactivo. 4. Enlace Directo a Google Maps.
-
-* **Framework Robusto:** Implementado con el framework **Django** y la estructura de un proyecto y una aplicación (`core/`).
-* **Consulta por Ciudad:** Permite buscar datos meteorológicos ingresando el nombre de una ciudad.
-* **Seguridad:** Utiliza **variables de entorno** (`.env`) para gestionar la clave de la API del clima, manteniéndola fuera del repositorio.
-* **Datos Clave:** Retorna la temperatura actual, la humedad, la sensación térmica y la velocidad del viento.
-* **Fuente de Datos:** Consume la API de `<Geoapify>`.
+A Django web application where we use map APIs for storing geographic data.
 
 
 
+## ✨ Main Features
+
+This project demonstrates the use of Django business functions: 1. Customer CRUD operations. 2. Coordinate storage (Lat/Lon). 3. Interactive map display. 4. Direct link to Google Maps.
+
+* **Robust Framework:** Implemented with the **Django** framework and the structure of a project and an application (`core/`).
+* **Query by City:** It allows you to search for weather data by entering the name of a city..
+* **Security:** Use **environment variables** (`.env`) to manage the weather API key, keeping it outside the repository.
+* **Key Data:** Return the current temperature, humidity, wind chill, and wind speed.
+* **Data Source:** Consumes the `<Geoapify>` API.
 
 
-## 🛠️ Tecnologías Utilizadas
 
-* **Lenguaje:** Python 3.12.3
+
+
+## 🛠️ Technologies Used
+
+* **Language:** Python 3.12.3
 * **Framework Web:** **Django**
 
 
-* **Proveedor de API:** `<Geoapify>`
+* **API Provider:** `<Geoapify>`
 
 
 
@@ -34,24 +33,23 @@ Este proyecto demuestra el uso de Django funciones de negocio: 1. CRUD de Client
 
 ---
 
-## 🚀 Instalación y Puesta en Marcha
+## 🚀 Installation and Start-up
 
-Sigue estos pasos para configurar y ejecutar el servidor de desarrollo de Django en tu máquina local.
 
-### 1. Clonar el Repositorio
+### 1. Clone the Reposirtory
 
 ```bash
-git clone <URL de tu repositorio en GitHub>
+git clone <URL of your repository on GitHub>
 cd weather_project
 
 
 
 
-# Crear el entorno virtual
+# Create the virtual environment
 python3 -m venv env
 
-# Activar el entorno virtual
-# En Linux/macOS:
+# Activate the virtual environment
+# In Linux/macOS:
 source env/bin/activate
-# En Windows (CMD):
+# In Windows (CMD):
 # .\env\Scripts\activate
